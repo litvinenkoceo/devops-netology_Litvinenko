@@ -1,13 +1,17 @@
  # 1.1. Введение в DevOps — Литвиненко Валерий
  ## Задание №1 - Подготовка рабочей среды
-<details><summary> 
-- Jsonnet: </summary>
- ![](img/jsonnet.png) 
- </details>
-- Markdown: ![](img/md.png)
-- Shell:![](img/sh.png)
-- Terraform: ![](img/terra.png)
-- Yaml: ![](img/yaml.png)
+
+<details><summary>A dropdown list for markdown</summary>
+
+1. Jsonnet: ![](img/jsonnet.png) 
+1. Markdown: ![](img/md.png)
+1. Shell:![](img/sh.png)
+1. Terraform: ![](img/terra.png)
+1. Yaml: ![](img/yaml.png)
+
+</details>
+
+
 
 
 ## Задание №2 - Описание жизненного цикла задачи (разработки нового функционала) 
