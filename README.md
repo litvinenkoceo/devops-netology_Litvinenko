@@ -1,4 +1,4 @@
- > Follow your heart.
+ > 1.1. Введение в DevOps — Литвиненко Валерий
 
  - Jsonnet: ![](img/jsonnet.png)
 - Markdown: ![](img/md.png)
