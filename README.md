@@ -1,7 +1,7 @@
  # 1.1. Введение в DevOps — Литвиненко Валерий
  ## Задание №1 - Подготовка рабочей среды
 
-<details><summary>A dropdown list for markdown</summary>
+<details><summary>**Скриншоты синтаксиса**</summary>
 
 1. Jsonnet: ![](img/jsonnet.png) 
 1. Markdown: ![](img/md.png)
