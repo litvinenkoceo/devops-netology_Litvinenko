@@ -1,8 +1,13 @@
-Будут проигнорированы:
-1. Локальные директории терраформа
-2. Файлы .tfstate, содержащие реквизиты и криденшналы
-3. Логи крашей
-4. Файлы перезаписей
-5. Но можно добавить шаблон перезаписей, для контроля этих паттернов
-6. тфплан файлы для плана вывода
-7. Файлы конфигурации консоли терраформа
+# Все 3 репозитория
+> https://github.com/litvinenkoceo/devops-netology_litvinenko
+> https://gitlab.com/litvinenkoceo/devops-netology_litvinenko
+> https://bitbucket.org/litvinenkoceo/devops-netology_litvinenko/src/main/
+
+##Вывод git remote -v
+bitbucket	https://litvinenkoceo@bitbucket.org/litvinenkoceo/devops-netology_litvinenko.git (fetch)
+bitbucket	https://litvinenkoceo@bitbucket.org/litvinenkoceo/devops-netology_litvinenko.git (push)
+gitlab	https://gitlab.com/litvinenkoceo/devops-netology_Litvinenko.git (fetch)
+gitlab	https://gitlab.com/litvinenkoceo/devops-netology_Litvinenko.git (push)
+origin	git@github.com:litvinenkoceo/devops-netology_Litvinenko.git (fetch)
+origin	git@github.com:litvinenkoceo/devops-netology_Litvinenko.git (push)
+
