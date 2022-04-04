@@ -1,4 +1,7 @@
-Коммит - все сломал и отчаялся
+#Commit 41 все починил + забросил через IDE
+
+
+> > Коммит перед тегами- все сломал и отчаялся
 # Все 3 репозитория
 -  https://github.com/litvinenkoceo/devops-netology_litvinenko
 -  https://gitlab.com/litvinenkoceo/devops-netology_litvinenko
