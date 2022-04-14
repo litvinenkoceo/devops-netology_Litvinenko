@@ -1,0 +1,47 @@
+# 5. VM Resources
+- 2 CPU with Acceleration
+- RAM 1024 mb
+- Video RAM 64m
+- HDD SATA AHCI Virtual size 64 Gb (1,73 Gb Real size)
+- Network mode NAT
+
+# 6 VM customize
+Settings
+> v.memory = 2048
+> v.cpus = 4
+
+# 8 Bash history
+Default setting in Ubuntu 20.04
+> echo $HISTSIZE
+>1000
+>echo $HISTFILESIZE
+>2000
+### Setting change in bashrc file
+> vim ~/.bashrc
+
+### ignoreboth 
+prikazivaet ignorit dublicats comand i comands 4to nachinautc9 c probela
+ignoreboth=ignoredups+ignorespace
+
+# 9 { } scenario    (man bash 262 strochka)  gruppovaya operatciya
+ { list; }
+list  is  simply executed in the current shell environment.  list must be terminated with a newline
+or semicolon.  This is known as a group command.
+
+# 10 Touch 10000
+> touch {1..10000}
+
+> touch {1..300000}
+> bash: /usr/bin/touch: Argument list too long
+
+# 11 [[ ]]
+Начиная с версии 2.02, Bash предоставляет в распоряжение программиста конструкцию [[ ... ]] расширенный вариант команды test, которая выполняет сравнение способом более знакомым программистам, пишущим на других языках программирования
+Nalichie papki proverka
+> [[ -d /tmp ]]
+
+# 12 Path
+# :w
+
+# 13 batch and at diff
+at выполняет задачи в назначенное время.
+batch выполняет задачи во время периодов низкой загруженности системы; другими словами, когда средний уровень загрузки системы падает ниже значения 1.5 или того значения, которое задано при вызове atd.
