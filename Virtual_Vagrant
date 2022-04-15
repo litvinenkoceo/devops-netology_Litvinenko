@@ -39,8 +39,12 @@ or semicolon.  This is known as a group command.
 Nalichie papki proverka
 > [[ -d /tmp ]]
 
-# 12 Path
-# :w
+# 12 Path 
+mkdir /tmp/new_path
+ln -s /bin/bash /tmp/new_path
+export PATH=/tmp/new_path:$PATH
+type -a bash
+
 
 # 13 batch and at diff
 at выполняет задачи в назначенное время.
