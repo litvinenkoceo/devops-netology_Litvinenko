@@ -1,55 +1,62 @@
-# Задание 2.4 "Инструменты Git"
+# 5. Ресурсы выделенные по умолчанию
+- 2 CPU with Acceleration
+- RAM 1024 mb
+- Video RAM 64m
+- HDD SATA AHCI Virtual size 64 Gb (1,73 Gb Real size)
+- Network mode NAT
 
-## 1. commit aefea      
-> git show aefea
+# 6 Добавить оперативной памяти или ресурсов процессора виртуальной машине
+В теле скрипта, например:
+> v.memory = 2048
 
-commit aefead2207ef7e2aa5dc81a34aedf0cad4c32545
-Update CHANGELOG.md
+> v.cpus = 4
 
-## 2. коммит 85024d3     
-> git show 85024
+# 8 Настройки истории Bash
+setting in Ubuntu 20.04     (строчка 1178 в man bash)
+> echo $HISTSIZE
 
-commit 85024d3100126de36331c6982bfaac02cdab9e76 (tag: v0.12.23)
+>1000
 
-## 3. b8d720 имеет 2 родителя:
-> git show --pretty=format:' %P' b8d720
+>echo $HISTFILESIZE
 
-56cd7859e05c36c06b56d013b55a252d0bb7e158
-9ea88f22fc6269854151c571162c5bcf958bee2b
+>2000
 
-## 4. v0.12.23..v0.12.24    
-> git log v0.12.23..v0.12.24 --oneline
+### Смена настроек происходит либо bashrc юзера или глобальная.
+> vim ~/.bashrc
 
-- 33ff1c03b v0.12.24
-- b14b74c49 [Website] vmc provider links
-- 3f235065b Update CHANGELOG.md
-- 6ae64e247 registry: Fix panic when server is unreachable
-- 5c619ca1b website: Remove links to the getting started guide's old location
-- 06275647e Update CHANGELOG.md
-- d5f9411f5 command: Fix bug when using terraform login on Windows
-- 4b6d06cc5 Update CHANGELOG.md
-- dd01a3507 Update CHANGELOG.md
-- 225466bc3 Cleanup after v0.12.23 release
+### ignoreboth 
+Директива игнорирует попадания дубликатов одновременно с строками с пробелами, является суммой двух команд:
+> ignoreboth=ignoredups + ignorespace
 
-## 5. commint with func providerSource  
-> git log -S'func providerSource' --oneline
+# 9 { } Сценарии использования - групповая операция. 
+описаны   man bash 262 строка,
+ { list; }
+list  is  simply executed in the current shell environment.  list must be terminated with a newline
+or semicolon.  This is known as a group command.
 
-8c928e835 main: Consult local directories as potential mirrors of providers
+# 10 однократным вызовом Touch 10000
+> touch {1..10000}
+-------------------
+> touch {1..300000}
 
-## 6. Все коммиты, в которых изменили функцию globalPluginDirs
-> git grep 'func globalPluginDirs'
-> git log -L :'func globalPluginDirs':plugins.go --oneline)
+> bash: /usr/bin/touch: Argument list too long
 
-- 78b122055 - changed
-- 52dbf9483 - changed
-- 41ab0aef7 - changed
-- 66ebff90c - changed
-- 8364383c3 - created
+# 11 [[ ]]
+Начиная с версии 2.02, Bash предоставляет в распоряжение программиста конструкцию [[ ... ]] расширенный вариант команды test, которая выполняет сравнение способом более знакомым программистам, пишущим на других языках программирования
+## Проверка наличия папки
+> [[ -d /tmp ]]
 
-## 7. Function synchronizedWriters author 
-> git log -S'func synchronizedWriters(
+# 12 Путь + type -a bash
+> mkdir /tmp/new_path
 
-commit 5ac311e2a91e381e2f52234668b49ba670aa0fe5
-Author: Martin Atkins <mart@degeneration.co.uk>
-Date:   Wed May 3 16:25:41 2017 -0700
+> ln -s /bin/bash /tmp/new_path
+
+> export PATH=/tmp/new_path:$PATH
+
+> type -a bash
+
+
+# 13 Разница между batch и at
+- at выполняет задачи в назначенное время.
+- batch выполняет задачи во время периодов низкой загруженности системы; другими словами, когда средний уровень загрузки системы падает ниже значения 1.5 или того значения, которое задано при вызове atd.
  
