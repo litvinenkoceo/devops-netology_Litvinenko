@@ -188,13 +188,99 @@ Paths: (24 available, best #16, table default)
       
       
 ## 2. Создайте dummy0 интерфейс в Ubuntu. Добавьте несколько статических маршрутов. Проверьте таблицу маршрутизации.
+Создание интерфейса
+```
+vim /etc/systemd/network/10-dummy0.netdev
+[NetDev]
+Name=dummy0
+Kind=dummy
+EOF
+```
+```
+vim /etc/systemd/network/20-dummy0.network
+[Match]
+Name=dummy0
+
+[Network]
+Address=10.0.8.1/24
+EOF
+```
+Перезагрузка службы
+`systemctl restart systemd-networkd`
+
+Проверка
+```
+root@laptop:~# ifconfig
+dummy0: flags=195<UP,BROADCAST,RUNNING,NOARP>  mtu 1500
+        inet 10.0.8.1  netmask 255.255.255.0  broadcast 10.0.8.255
+        inet6 fe80::58d2:e8ff:fe8d:1471  prefixlen 64  scopeid 0x20<link>
+        ether 5a:d2:e8:8d:14:71  txqueuelen 1000  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 1  bytes 70 (70.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+```
+Добавление статического маршрута
+```
+/etc/netplan/02-networkd.yaml
+network:
+  version: 2
+  ethernets:
+    eth0:
+      optional: true
+      addresses:
+        - 10.0.2.3/24
+      routes:
+        - to: 10.0.4.0/24
+          via: 10.0.2.2
+```
+Проверка создания
+```
+# ip r
+default via 10.0.2.2 dev eth0 proto dhcp src 10.0.2.15 metric 100
+10.0.2.0/24 dev eth0 proto kernel scope link src 10.0.2.3
+10.0.2.2 dev eth0 proto dhcp scope link src 10.0.2.15 metric 100
+10.0.4.0/24 via 10.0.2.2 dev eth0 proto static
+10.0.8.0/24 dev dummy0 proto kernel scope link src 10.0.8.1
+```
+
+```
+# ip r | grep static
+10.0.4.0/24 via 10.0.2.2 dev eth0 proto static
+```
 
 ## 3. Проверьте открытые TCP порты в Ubuntu, какие протоколы и приложения используют эти порты? Приведите несколько примеров.
+```
+root@laptop:~# ss -tnlp
+State   Recv-Q  Send-Q   Local Address:Port      Peer Address:Port  Process
+LISTEN  0       64             0.0.0.0:2049           0.0.0.0:*
+LISTEN  0       4096           0.0.0.0:42213          0.0.0.0:*      users:(("rpc.mountd",pid=1057,fd=9))
+LISTEN  0       4096           0.0.0.0:49673          0.0.0.0:*      users:(("rpc.mountd",pid=1057,fd=17))
+LISTEN  0       64             0.0.0.0:37835          0.0.0.0:*
+LISTEN  0       4096           0.0.0.0:111            0.0.0.0:*      users:(("rpcbind",pid=866,fd=4),("systemd",pid=1,fd=34))
+LISTEN  0       4096     127.0.0.53%lo:53             0.0.0.0:*      users:(("systemd-resolve",pid=868,fd=13))
+LISTEN  0       128            0.0.0.0:22             0.0.0.0:*      users:(("sshd",pid=1076,fd=3))
+LISTEN  0       4096                 *:9100                 *:*      users:(("node_exporter",pid=1037,fd=3))
+```
+:53 dns
+:22 ssh
+:9100 Node_exporter
 
 ## 4. Проверьте используемые UDP сокеты в Ubuntu, какие протоколы и приложения используют эти порты?
+```
+root@laptop:~# ss -unap
+State  Recv-Q Send-Q        Local Address:Port    Peer Address:Port Process
+UNCONN 0      0                   0.0.0.0:35923        0.0.0.0:*     users:(("avahi-daemon",pid=902,fd=14))
+UNCONN 0      0                   0.0.0.0:52925        0.0.0.0:*     users:(("rpc.mountd",pid=1057,fd=16))
+UNCONN 0      0             127.0.0.53%lo:53           0.0.0.0:*     users:(("systemd-resolve",pid=868,fd=12))
+ESTAB  0      0      192.168.0.102%wlp3s0:68       192.168.0.1:67    users:(("NetworkManager",pid=937,fd=23))
+UNCONN 0      0                   0.0.0.0:111          0.0.0.0:*     users:(("rpcbind",pid=866,fd=5),("systemd",pid=1,fd=159))
+```
+:53 - DNS
+:68 - Используется клиентскими машинами для получения информации о динамической IP-адресации от DHCP-сервера.
 
 ## 5. Используя diagrams.net, создайте L3 диаграмму вашей домашней сети или любой другой сети, с которой вы работали.
-
+![graph](https://user-images.githubusercontent.com/102476897/168658288-4715faed-a0d9-4387-b717-770300ee76e3.PNG)
 
 
 
